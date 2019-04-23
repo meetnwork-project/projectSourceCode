@@ -77,6 +77,7 @@
 		</style>
 	</head>
 	<body>
+		<form action="/home" method="get">
 		<h1 align="center" style="color:white" style="font-family: cuckoo">MeetnWork</h1>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
 			<a class="navbar-brand" href="homepage.html">
@@ -158,19 +159,8 @@
 						</div>
 				</div>
 			</div>
-			<div class="col-8" action="/home" method="get">
-			<% 
-			if (data) { 
-			    var rows = '';
-				data.forEach(function(item){//this should only return one item that matches the classes the current user is taking
-					item.classes.forEach(function(class_item){
-						//iterates through the classes and creates a table for each class.
-						rows += '<table class="table table-hover" id="class'+class_item+'TableMain"><tbody><tr><br><h2>'+class_item+'</h2></tr><tr><th><b>Active Users</b></th>							<th><b>Activities Description</b></th></tr></tbody><table>';
-					})
-			  	 });%>
-			  	 <%- rows %>
-			<% } %>
-		  </div>
+			
+			
 		</div>
 	</div>
 			
@@ -217,6 +207,6 @@
 			}
 		</script>
 
-
+	</form>
 	</body>
 	</html>
