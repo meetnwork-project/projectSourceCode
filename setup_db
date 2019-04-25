@@ -46,8 +46,29 @@ CREATE TABLE IF NOT EXISTS user_todos (
 );
 
 INSERT INTO user_todos VALUES 
-(11, ARRAY[1,2], ARRAY['homework 3', 'problem set 2']);
+(11, ARRAY[1,2], ARRAY['homework 3', 'problem set 2']),
+(12, ARRAY[2,3], ARRAY['homework 3 and 4', 'problem set 5']),
+(13, ARRAY[1,3], ARRAY['homework 4', 'problem set 5 number 6']);
 
 INSERT INTO user_table VALUES
-(11, 'Elizabeth', 'Robinson', 'CSCI', 3, ARRAY[1,2,3], CAST(1 AS BOOL), 'elro2540');
+(11, 'Elizabeth', 'Robinson', 'CSCI', 3, ARRAY[1,2,3], CAST(1 AS BOOL), 'elro2540'),
+(12, 'Brad', 'Pitt', 'CSCI', 3, ARRAY[2,3], CAST(1 AS BOOL)),
+(13, 'Jennifer', 'Lopez', 'CSCI', 2, ARRAY[1,2,3], CAST(1 AS BOOL));
 
+INSERT INTO login_table VALUES ('elro2540', 'elro2540@colorado.edu', 'password');
+
+UPDATE user_todos
+SET location = 'Engineering Center' WHERE user_id = 12;
+
+UPDATE user_todos 
+SET location_desc = 'Main room in Bold Center' WHERE user_id = 12;
+
+UPDATE user_todos
+SET location = 'Engineering Center' WHERE user_id = 13;
+
+UPDATE user_todos
+SET location_desc = 'In small CSEL room.' WHERE user_id = 13;
+
+ALTER TABLE user_todos
+ALTER COLUMN location SET NOT NULL,
+ALTER COLUMN location_desc SET NOT NULL;
