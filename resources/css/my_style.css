@@ -12,6 +12,10 @@ h1 {
 	background-color: #343A40;
 }
 
+h2 {
+	margin-left: 100px;
+}
+
 .navbar {
 	
 	margin-bottom: 0px;
@@ -20,4 +24,52 @@ h1 {
 	background-color: #343A40;
 }
 
+.button {
+	margin: 0px;
+	width:150px;
+	align-items: center;
+	padding: 5px;
+	position: absolute;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%,0);
 
+}
+
+#class1TableMain {
+	width: 1200px;
+	margin-left: 100px;
+}
+
+#class2TableMain {
+	width: 1200px;
+	margin-left: 100px;
+}
+
+#class3TableMain {
+	width: 1200px;
+	margin-left: 100px;
+}
+
+#class4TableMain {
+	width: 1200px;
+	margin-left: 100px;
+}
+
+#tablesMain {
+	margin-left: 400px;
+}
+
+.row {
+	padding-left: 0px;
+}
+
+.container {
+	margin-top: 8px;
+	margin-left: 5px;
+}
+
+#toDoRow {
+	font-size: 30px;
+	text-align: center;
+}

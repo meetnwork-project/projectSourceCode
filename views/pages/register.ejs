@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Register Page</title>
+	
+    <!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<link href="resources/css/my_style.css" rel="stylesheet">
+  </head>
+
+  <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="home.html">
+			<img class="rounded-circle" src="https://www.logolynx.com/images/logolynx/17/17f67155897b66d860aa1ade9ad61b9a.png" alt="CU Boulder Logo logolynx.com" width="100" height="50">
+		</a>
+	<h1 style="color:white"; style=""> <b>Registration Page</b> </h1>
+
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarText">
+	</div>
+	</nav>
+	<br>
+
+	<div class="container">
+		<form action="/register" method="post">
+			<div class="form-group row">
+				<label  for="username"><b>Enter your Username </b></label>
+					<br>
+					<input type="text" class="form-control" name="name" id="user_name"  placeholder="example123">
+			</div>
+			<div class="form-group row">
+				<label for="firstname"> <b>Enter your First Name </b></label>
+					<br>
+					<input type="text" class="form-control" name = "first_name" id="user_first_name" placeholder="First name">
+			</div>
+			<div class="form-group row">
+				<label for="lastname"> <b>Enter your Last Name</b></label>
+					<br>
+					<input type="text" class="form-control" name="last_name" id="user_last_name" placeholder="Last name">
+			</div>
+			<div class="form-group row">
+				<label  for="emailAddress"><b>Enter your Email </b></label>
+					<br>
+					<input type="email" class="form-control" name="emailAddress" id="user_email" placeholder="example@colorado.edu">
+			</div>
+			<div class="form-group row">
+				<label for="passwordFirst"><b>Enter your Password </b></label>
+					<br>
+					<input type="password" class="form-control" id="user_password" name="password" placeholder="Password">
+			</div>
+			<div class="form-group row">
+				<label for="passwordConfirm"><b>Enter your Password to Confirm </b></label>
+				<br>
+					<input type="password" class="form-control" id="user_confirm_password" name="confirm_password" placeholder="Confirm Password">
+			</div>
+			<div class="form-group row">
+				<label for="input-check-label"><b>Choose your Major</b></label>
+				<div>
+				<br><input class="form-check-input" type="radio" id="CS" name="M_choice" value="1">Computer Science<br>
+				<input class="form-check-input" type="radio" id="ME" name="M_choice" value="2">Mechanical Engineering<br>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="form-check-label"><b>Choose your Year</b></label>
+				<div>
+					
+					<br><input class="form-check-input" type="radio" id="Freshman" name="G_choice" value="1">Freshman<br>
+					<input class="form-check-input" type="radio" id="Sophomore" name="G_choice" value="2">Sophomore<br>
+					<input class="form-check-input" type="radio" id="Junior" name="G_choice" value="3">Junior<br>
+					<input class="form-check-input" type="radio" id="Senior" name="G_choice" value="4">Senior
+					
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="form-check-label"><b>Select your Classes:</b></label>
+				<div>
+					<br>
+					<input class="form-check-input" type="checkbox" id="SD" name="C_choice" value="1">Software Development<br>
+					<input class="form-check-input" type="checkbox" id="LA" name="C_choice" value="2">Linear Algebra<br>
+					<input class="form-check-input" type="checkbox" id="CT" name="C_choice" value="3">Critical Thinking<br>
+					<input class="form-check-input" type="checkbox" id="HT" name="C_choice" value="4">Heat Transfer<br>		
+
+				</div>	
+			</div>	
+		</form>
+	</div>
+	<br>
+
+	<div class="button" action="/register/verify" >
+		<input type="button" value="Submit" class="btn btn-primary btn-block" name="registration" onclick="re_check()"><br>
+		<% 
+			if (data) { 
+				var is_unique = data[0];
+				if(is_unique = 1){
+					alert("Please choose a unique username")
+				}
+				else{
+					
+				}
+			  	 };%>
+			  	 <%- rows %>
+			<% } %>
+	</div>
+	<script>
+		function re_check(){
+			var username = document.getElementById("user_name").value;
+			var email = document.getElementById("user_email").value;
+			var password = document.getElementById("user_password").value;
+			var check_password = document.getElementById("user_confirm_password").value;
+			if(username=="" || password=="" || email==""){
+				alert("Username, password, and email fields must be filled out.")
+				return false
+			}
+			else if(password!=check_password){
+				alert("Password and confirm password must match.")
+				return false
+			}
+			else{
+			}
+		}
+	</script>
+
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+	
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!-- Home Page -->
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<title>MeetnWork</title>
+		<link rel='icon' href='https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Colorado_Buffaloes_logo.svg/1200px-Colorado_Buffaloes_logo.svg.png' type='image/x-icon'/>
+		<!--Bootstrap core CSS-->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="resources/css/my_style.css" rel="stylesheet" type=text/css>
+		<style>
+			h1 {background-color: #343A40}
+			.switch {
+			  position: relative;
+			  display: inline-block;
+			  width: 60px;
+			  height: 34px;
+			}
+
+			.switch input { 
+			  opacity: 0;
+			  width: 0;
+			  height: 0;
+			}
+
+			.slider {
+			  position: absolute;
+			  cursor: pointer;
+			  top: 0;
+			  left: 0;
+			  right: 0;
+			  bottom: 0;
+			  background-color: #ccc;
+			  -webkit-transition: .4s;
+			  transition: .4s;
+			}
+
+			.slider:before {
+			  position: absolute;
+			  content: "";
+			  height: 26px;
+			  width: 26px;
+			  left: 4px;
+			  bottom: 4px;
+			  background-color: white;
+			  -webkit-transition: .4s;
+			  transition: .4s;
+			}
+
+			input:checked + .slider {
+			  background-color: #CFB87C;
+			}
+
+			input:focus + .slider {
+			  box-shadow: 0 0 1px #CFB87C;
+			}
+
+			input:checked + .slider:before {
+			  -webkit-transform: translateX(26px);
+			  -ms-transform: translateX(26px);
+			  transform: translateX(26px);
+			  
+			}
+			
+			/* Rounded sliders */
+			.slider.round {
+			  border-radius: 34px;
+			}
+
+			.slider.round:before {
+			  border-radius: 50%;
+			}
+
+		</style>
+	</head>
+	<body>
+		<h1 align="center" style="color:white" style="font-family: cuckoo">MeetnWork</h1>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
+			<a class="navbar-brand" href="/home">
+				<img class="w3-round" src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Colorado_Buffaloes_logo.svg/1200px-Colorado_Buffaloes_logo.svg.png" alt="" width="35" height="25">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarText">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="/home">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/profile">Profile Page</a>
+					</li>
+				</ul>
+				<div class="form-inline my-2 my-lg-0">
+					<button class="btn btn-outline-light my-2 my-sm-0" type="submit" onclick="logoutFunction()">Logout</button>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+		<br>
+		<div class="row">
+			<div class="col-4">
+				<div class="card" id="profileSection" >
+					<img class="card-img-top" src="https://www.manufacturingusa.com/sites/manufacturingusa.com/files/default.png" alt="" height="250px" width="150px">
+					<div class="card-body mx-auto">
+						<table class="table table-bordered" id="profileTable">
+							<tr>
+								<th>Name</th>
+								<td>
+									<%if(curr_users_name){%>
+										<%-curr_users_name[0].first_name%> <%-curr_users_name[0].last_name%>
+									<%}%>
+
+								</td>
+							</tr>
+							<form action="/home/status" method="post">
+							<!-- <tr>
+								<th>
+									<div id="status">Inactive</div>
+								</th>
+								<td>
+									<label class="switch">
+										<input type="checkbox" class="hidden" name="status" value="1">
+										<span class="slider round" onclick="toggleFunction()" ></span>
+									</label>
+								</td>
+							</tr> -->
+							<tr>
+								<div class="form-group">
+								<th>Location</th>
+								<td><input type="text" class="form-control" name ="location" id="location" placeholder="" maxlength="50" rows="2">
+								</td>
+								</div>
+							</tr>
+							<tr>
+								<div class="form-group">
+								<th>How Can I Find You?</th>
+								<td><input type="text" class="form-control" id="location_desc" name="location_desc" placeholder="" maxlength="50">
+								</td>
+								</div>
+							</tr>
+						</table>
+						<input type="submit" class="btn btn-info btn-block" value="Submit">
+						</form>
+					</div>
+					<div class="container" id="toDoContainer">
+						<form action="/home/todos" method="post">
+						<tr>
+							<div class="form-group" id="toDoRow">
+								<th>To Do</th>
+								<button id="editButton" class="btn btn-sm btn" style="font-size:24px" onclick="onClickFunction(
+								<%=user_classes[0].classes.length%>
+								)"> <i class="fa">&#xf044;</i></button>
+								<button type="submit" id="doneEditing" class="btn btn-sm btn" style="font-size: 24px" disabled onclick="onClickDone(<%=user_classes[0].classes.length%>)"> <i class="fa">&#xf058;</i></button>
+							</div>
+						</tr>
+						<%if(user_classes){//populates todo list with current classes user is taking
+							var todo_rows = '';
+							var i = 1;
+							user_classes[0].classes.forEach(function(each_class){
+								var class_index = each_class-1//class ids start at 1, classes array starts at 0
+								todo_rows += '<div class="form-group"><th>'+data[class_index].class_name+'</th><input type="text" class="form-control" id="class'+i+'" name="class'+i+'" placeholder="" maxlength="50" disabled onclick="onClickFunction()"></div>';
+								i += 1;
+							});%>
+						  	<%- todo_rows %>
+						<% }%>
+						<input type="submit" class="btn btn-info btn-block" value="Submit"><br><br><br><br><br>
+					</form>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-8" style="width: 25rem;"> <!-- action="/home" method="get" -->
+			<% 
+			if (my_data) { 
+			    var rows = '';
+				my_data[0].classes.forEach(function(class_item){
+					//my_data should only return one data row that matches the current user
+					//class_item = each class in classes array from user_todos
+					//rows+= adds a new table for each class 
+					var class_index = class_item-1
+					rows += '<table class="table table-hover" id="class'+class_index+'"><tbody><tr><br><h2>'+data[class_index].class_name+'</h2></tr><tr><th><b>Active Users</b></th>							<th><b>Working On</b></th><th><b>Location</b></th><th><b>Location Description</b></th></tr>';
+					other_userdata.forEach(function(user){//for each user
+						var i = 0;
+						user.classes.forEach(function(user_class){//iterate through class array to find match with current class
+							if(user_class == class_item){
+								rows += '<tr><td>'+user.first_name+' '+user.last_name+'</td>';
+								rows += '<td>'+user.todos[0]+'</td>';
+								rows += '<td>'+user.location+'</td>';
+								rows += '<td>'+user.location_desc+'</td></tr>';
+							}
+							i += 1;
+						})
+					})
+					rows += '</tbody><table>';
+				// })
+			  	});%>
+			  	<%- rows %>
+			<% } %>
+		  	</div>
+		</div>
+	</div>
+			
+
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+		<script>
+		// $( "form" ).submit(function( event ) {
+		//   if ( $( "input:first" ).val() === "correct" ) {
+		//     $( "span" ).text( "Validated..." ).show();
+		//     return;
+		//   }
+		 
+		//   $( "span" ).text( "Not valid!" ).show().fadeOut( 1000 );
+		//   event.preventDefault();
+		// });
+		// </script>
+		<script>
+			function onClickFunction(a){
+				var i;
+				for (i=1; i<=a; i++){
+					document.getElementById("class"+i).disabled = false;
+				}
+				document.getElementById("editButton").disabled = true;
+				document.getElementById("doneEditing").disabled = false;
+				document.getElementById("doneEditing").style.color = 'green';
+			}
+		</script>
+		<script>
+			function onClickDone(a){
+				document.getElementById("doneEditing").disabled = true;
+				document.getElementById("editButton").disabled = false;
+				document.getElementById("doneEditing").style.color = 'gray';
+				var i;
+				for (i=1; i<=a; i++){
+					document.getElementById("class"+i).disabled = true;
+				}
+			}
+		</script>
+		<script>
+			function toggleFunction(){
+				if(document.getElementById("status").innerHTML === "Inactive"){
+					document.getElementById("status").innerHTML = "Active";
+					document.getElementById("location").disabled = true;
+					document.getElementById("location_desc").disabled = true;
+
+
+				}
+				else{
+					document.getElementById("status").innerHTML = "Inactive";
+					document.getElementById("location").disabled = false;
+					document.getElementById("location_desc").disabled = false;
+
+				}
+
+				
+			}
+		</script>
+	</body>
+</html>
