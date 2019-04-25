@@ -13,7 +13,6 @@ const dbConfig = {
    database: 'meetnwork_db',
    user: 'postgres',
    password: 'pass'
-   //password: config.db.password
 };
 
 var db = pgp(dbConfig);
@@ -24,7 +23,7 @@ module.exports = {
 	}
 }
 
-
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
 
@@ -39,101 +38,67 @@ app.get('/', function(req, res) {
 	res.render('pages/login',{
 		local_css:"signin.css",
 		my_title:"Login Page",
-		loginInfo: '',
+		login_query: '',
+		message:''
 		//loginCheck: '',
-		passInfo: ''
+		
 	});
 	
 });
 
 
-app.get('/login', function(req, res) {
-	
-	res.render('pages/login',{
-		local_css:"signin.css",
-		my_title:"Login Page",
-		loginInfo: '',
-		//loginCheck: '',
-		passInfo: ''
-	});
+
+app.get('/login',async function(req, res) {
+
+    //var email=req.body.email;
+    //var password=req.body.password;
+    var inputEmail=req.query.email;
+    console.log("email:");
+    console.log(inputEmail);
+    var inputPassword=req.query.password;
+    console.log("pass:");
+    console.log(inputPassword);
+
+    if(inputEmail==''||inputPassword==''){
+         res.render('pages/login',{
+         my_title:"Log in Page",
+         message:"Both email and password are required."
+       });
+    }
+    else{
+    	var login_query = "SELECT user_password FROM login_table WHERE user_email='"+inputEmail+"';";
+		console.log("loginquery:");
+		console.log(login_query);
+        db.any(login_query).then(function(result){
+        	console.log(result[0].user_password);
+            if(result[0].user_password!=inputPassword){
+               res.render('pages/login',{
+               my_title:"Log in Page",
+               message:"Incorrect password. Please try again."
+               })
+            }
+            else{
+               res.render('pages/home',{
+               my_title:"Home Page"
+            })
+            
+        }
+    })
+    .catch(function(err){
+        res.render('pages/login',{
+           my_title:"Log in Page",
+           message:""
+       });
+    })
+}
 });
 
 
-app.get('/login/submit', function(req, res) {
-	var inputEmail = req.query.email;
-	console.log(inputEmail);
-	var inputPassword = req.query.password;
-	console.log(inputPassword);
 
-	//var loginInfo = "SELECT user_email FROM login_table WHERE user_email =' '"+ inputEmail+"';";
-	var loginInfo = "SELECT user_email FROM login_table WHERE user_email='"+inputEmail+"';";
-	console.log(loginInfo);
 
-	//var loginCheck = 'SELECT user_name FROM user_table WHERE user_name = ' + loginInfo+';';
-	//console.log(loginCheck);
 
-	//var passInfo = "SELECT user_password FROM login_table WHERE user_email =' '"+ inputEmail+"';";
-	var passInfo = "SELECT user_password FROM login_table WHERE user_email='"+inputEmail+"';";
-	console.log(passInfo);
 
-	db.task('get-everything', task => {
-		return task.batch([
-			task.any(loginInfo),
-			//task.any(loginCheck),
-			task.any(passInfo)
-		]);
-	})
-	if(inputEmail==loginInfo){
-		res.render('pages/home',{
-			my_title: "Login Page"
-		});
-	}
-	else{
-		//console.log(inputEmail);
-		console.log("login info:");
-		console.log(loginInfo);
-		db.any(loginInfo)
-		.then(function(result){
-			res.render('pages/login',{
-				my_title:"Login page",
-				loginInfo:'',
-				passInfo: ''
-			})
-		})
-		.catch(function(err){
-			console.log("error");
-			res.render('pages/login',{
-				title:"Login page",
-				loginInfo:'',
-				passInfo:''
-			})
-		});
 
-	}
-	/*
-		.then(info =>{
-			res.render('pages/home',{
-			local_css:"signin.css", 
-			my_title:"Login Page",
-			data: info[0],
-			loginInfo: info[1],
-			//loginCheck: info[1],
-			passInfo: info[2]
-			})
-		})
-	
-		.catch(function(err){
-			//req.flash('error', err);
-			//console.log("error loading");
-			res.render('pages/login',{
-				title:'Login Page',
-				loginInfo: '',
-				//loginCheck: '',
-				passInfo: ''
-			});
-		});
-	*/
-});
 
 // registration page 
 app.get('/register', function(req, res) {

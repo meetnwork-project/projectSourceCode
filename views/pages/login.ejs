@@ -30,7 +30,7 @@ initial-scale=1, shrink-to-fit=no">
   <!--
   <body class="center text-center"> -->
     <body>
-  
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center">
       <a class="navbar-brand">
         <link rel='icon' href='../resources/img/favicon.ico' type='image/x-icon'/>
@@ -42,7 +42,16 @@ initial-scale=1, shrink-to-fit=no">
       <h1 style="color:white"> <b>MeetnWork Login</b></h1> 
     </nav>
    
-    <form action="/login/submit" method="get">
+    <form action="/login" method="get"> 
+      <!--<form class="form-signin"> -->
+
+      <% if (message){
+      var output_message='<P><B>'+message+'</B></P>'; %>
+      <%-output_message %>
+      <%}%>
+
+      
+
       <br><br>
       <div class="container">
           <div class="form-group text-left">
