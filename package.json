@@ -2,6 +2,7 @@
   "name": "node-ejs",
   "main": "server.js",
   "dependencies": {
+
     "connect": "^3.6.6",
     "connect-flash": "^0.1.1",
     "ejs": "^2.5.5",
@@ -9,8 +10,13 @@
     "express": "^4.6.1",
     "express-session": "^1.16.1",
     "passport-local": "^1.0.0",
-    "pg-promise": "^8.5.1",
     "request": "^2.88.0"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
+    "express-validator": "^5.3.1",
+    "pg": "^7.10.0",
+    "pg-promise": "^8.5.1"
+
   },
   "repository": {
     "type": "git",
