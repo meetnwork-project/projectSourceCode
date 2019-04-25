@@ -2,17 +2,37 @@
   "name": "node-ejs",
   "main": "server.js",
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "cookie-parser": "^1.4.4",
+
+    "connect": "^3.6.6",
+    "connect-flash": "^0.1.1",
     "ejs": "^2.5.5",
     "ejs-lint": "^0.3.0",
-    "express": "^4.16.4",
+    "express": "^4.6.1",
+    "express-session": "^1.16.1",
+    "passport-local": "^1.0.0",
+    "request": "^2.88.0"
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.4",
     "express-validator": "^5.3.1",
     "pg": "^7.10.0",
     "pg-promise": "^8.5.1"
+
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/meetnwork-project/projectSourceCode.git"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "bugs": {
+    "url": "https://github.com/meetnwork-project/projectSourceCode/issues"
+  },
+  "homepage": "https://github.com/meetnwork-project/projectSourceCode#readme",
+  "version": "1.0.0",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

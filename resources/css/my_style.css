@@ -1,4 +1,3 @@
-/* Add any css you want to use for you website here */
 
 html, body {
 	height:100%;
@@ -6,23 +5,28 @@ html, body {
 
 h1 {
 	padding: 0px;
-	
 	margin-bottom: 0px;
 	margin-top: 0px;
 	background-color: #343A40;
+	font-size: 3rem !important;
+  	text-shadow: 2px 20px 9px black;
 }
 
 h2 {
 	margin-left: 100px;
 }
 
+/*
 .navbar {
 	
 	margin-bottom: 0px;
 	margin-top: 0px;
 	padding: 10px;
 	background-color: #343A40;
+
 }
+*/
+
 
 .button {
 	margin: 0px;
