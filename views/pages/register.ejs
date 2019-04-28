@@ -10,22 +10,30 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 	<link href="resources/css/my_style.css" rel="stylesheet">
   </head>
-
   <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="home.html">
-			<img class="rounded-circle" src="https://www.logolynx.com/images/logolynx/17/17f67155897b66d860aa1ade9ad61b9a.png" alt="CU Boulder Logo logolynx.com" width="100" height="50">
-		</a>
-	<h1 style="color:white"; style=""> <b>Registration Page</b> </h1>
-
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+  	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <a class="navbar-brand" href="/home">
+		<img class="rounded-circle" src="https://www.logolynx.com/images/logolynx/17/17f67155897b66d860aa1ade9ad61b9a.png" alt="CU Boulder Logo logolynx.com" width="100" height="50">
+	  </a>
+	  <h1 style="color:white"; style=""> <b>Registration Page</b> </h1>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarText">
-	</div>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarText">
+		<!--
+		<ul class="navbar-nav mr-auto">
+		 <li class="nav-item">
+			<a class="nav-link" href="login.html">Login Page</a>
+		  </li>
+		</ul>
+		-->
+	  </div>
 	</nav>
+	<% if (message){
+	var output_message='<P><B>'+message+'</B></P>'; %>
+	<%-output_message %>
+	<%}%>
 	<br>
-
 	<div class="container">
 		<form action="/register" method="post">
 			<div class="form-group row">
@@ -46,7 +54,7 @@
 			<div class="form-group row">
 				<label  for="emailAddress"><b>Enter your Email </b></label>
 					<br>
-					<input type="email" class="form-control" name="emailAddress" id="user_email" placeholder="example@colorado.edu">
+					<input type="email" class="form-control" name="email" id="user_email" placeholder="example@colorado.edu">
 			</div>
 			<div class="form-group row">
 				<label for="passwordFirst"><b>Enter your Password </b></label>
@@ -58,6 +66,7 @@
 				<br>
 					<input type="password" class="form-control" id="user_confirm_password" name="confirm_password" placeholder="Confirm Password">
 			</div>
+		
 			<div class="form-group row">
 				<label for="input-check-label"><b>Choose your Major</b></label>
 				<div>
@@ -79,51 +88,23 @@
 			<div class="form-group row">
 				<label for="form-check-label"><b>Select your Classes:</b></label>
 				<div>
-					<br>
-					<input class="form-check-input" type="checkbox" id="SD" name="C_choice" value="1">Software Development<br>
+					
+					<br><input class="form-check-input" type="checkbox" id="SD" name="C_choice" value="1">Software Development<br>
 					<input class="form-check-input" type="checkbox" id="LA" name="C_choice" value="2">Linear Algebra<br>
 					<input class="form-check-input" type="checkbox" id="CT" name="C_choice" value="3">Critical Thinking<br>
 					<input class="form-check-input" type="checkbox" id="HT" name="C_choice" value="4">Heat Transfer<br>		
 
 				</div>	
-			</div>	
+			</div>
+			
+	<div class="button">
+	<input type="submit" value="Submit" class="btn btn-primary btn-block" name="registration" ><br>
+	</div>
+			
 		</form>
+		<br>
 	</div>
-	<br>
 
-	<div class="button" action="/register/verify" >
-		<input type="button" value="Submit" class="btn btn-primary btn-block" name="registration" onclick="re_check()"><br>
-		<% 
-			if (data) { 
-				var is_unique = data[0];
-				if(is_unique = 1){
-					alert("Please choose a unique username")
-				}
-				else{
-					
-				}
-			  	 };%>
-			  	 <%- rows %>
-			<% } %>
-	</div>
-	<script>
-		function re_check(){
-			var username = document.getElementById("user_name").value;
-			var email = document.getElementById("user_email").value;
-			var password = document.getElementById("user_password").value;
-			var check_password = document.getElementById("user_confirm_password").value;
-			if(username=="" || password=="" || email==""){
-				alert("Username, password, and email fields must be filled out.")
-				return false
-			}
-			else if(password!=check_password){
-				alert("Password and confirm password must match.")
-				return false
-			}
-			else{
-			}
-		}
-	</script>
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

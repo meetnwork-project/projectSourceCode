@@ -30,85 +30,67 @@
 	  </div>
 	</nav>
 	<br>
-	<div class="container">
-		<div class="form-group row">
-			<img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png" class="img-thumbnail" alt="Current Profile Picture" style="max-width:250px; min-width:250px; margin-left:auto; margin-right:auto">
-		</div>
-		<form action="home.html">
-			<div class="form-group row">
-				<label  for="fullName"> <b>Upload New Profile Picture:</b></label>
-				<br>
-				<br>
-				<div class="col-sm-8">
-					<input type="file" class="form-control" name="picturefile" id="picturefile" >
-				</div>
+	<% if (message){
+	var output_message='<P><B>'+message+'</B></P>'; %>
+	<%-output_message %>
+	<%}%>
+	<form action="/profile_edit" method="post">
+		<div class="container">
+		    <div class="form-group row">
+					<label for="firstname"> <b>Enter your First Name </b></label>
+						<br>
+						<input type="text" class="form-control" name = "first_name" id="user_first_name" placeholder="First name">
 			</div>
-			<div class="form-group row">
-				<label  for="fullName"> <b>Edit Full Name:</b></label>
-				<br>
-				<br>
-				<div class="col-sm-8">
-					<input type="text" class="form-control" name="fullName" id="fullName"  value="Johnny Appleseed">
+				<div class="form-group row">
+					<label for="lastname"> <b>Enter your Last Name</b></label>
+						<br>
+						<input type="text" class="form-control" name="last_name" id="user_last_name" placeholder="Last name">
 				</div>
-			</div>
-			<div class="form-group row">
-				<label  for="emailAddress"><b>Edit Username:</b></label>
-				<div class="col-sm-8">
-					<input type="email" class="form-control" name="emailAddress" id="emailAddress" value="joap1337@colorado.edu">
+				<div class="form-group row">
+					<label for="passwordFirst"><b>Enter your Password </b></label>
+						<br>
+						<input type="password" class="form-control" id="user_password" name="password" placeholder="Password">
 				</div>
-			</div>
-			<div class="form-group row">
-				<label for="passwordFirst"><b>Change Password:</b></label>
-				<div class="col-sm-8">
-					<input type="password" class="form-control" id="passwordFirst" name="passwordFirst" placeholder="Password">
+				<div class="form-group row">
+					<label for="passwordConfirm"><b>Enter your Password to Confirm </b></label>
+					<br>
+						<input type="password" class="form-control" id="user_confirm_password" name="confirm_password" placeholder="Confirm Password">
 				</div>
-			</div>
-			<div class="form-group row">
-				<label for="passwordConfirm"><b>Confirm Password:</b></label>
-				<div class="col-sm-8">
-					<input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm Password">
-				</div>
-			</div>
-			
-			<div class="form-group row">
-				<label for="personalityInput"><b>Edit Study Habits:</b></label>
-				<div class="col-sm-5">
-					<input type="personality" class="form-control" id="personality" name="personality" value="Listens to music, takes frequent breaks">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="interestsInput"><b>Edit Interests:</b></label>
-				<div class="col-sm-5">
-					<input type="interests" class="form-control" id="interestsInput" name="interestsInput" value="Drawing, hiking">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="majorInput"><b>Edit Major:</b></label>
-				<div class="col-sm-8">
-					<input type="major" class="form-control" id="majorInput" name="majorInput" value="Computer Science">
-				</div>
-			</div>
-			<div class="form-group row">
-				<label for="gradDateInput"><b>Edit Graduation Date:</b></label>
-				<div class="col-sm-5">
-					<input type="gradDate" class="form-control" id="gradDateInput" name="gradDateInput" value="2020">
-				</div>
-			</div>
-			<div class="form-group row">
-					<label for="classInput"><b>Add/Remove Classes:</b></label>
-					<div class="col-sm-5">
-						<select class="custom select">
-							<option selected>Classes you're enrolled in</option>
-							<option value="1">CSCI 3308</option>
-							<option value="2">CSCI 2270</option>
-							<option value="3">CSCI 1300</option>
-						</select>
+					<div class="form-group row">
+					<label for="input-check-label"><b>Choose your Major</b></label>
+					<div>
+					<br><input class="form-check-input" type="radio" id="CS" name="M_choice" value="1">Computer Science<br>
+					<input class="form-check-input" type="radio" id="ME" name="M_choice" value="2">Mechanical Engineering<br>
 					</div>
 				</div>
-			<input type="submit" value="Save Changes" class="btn btn-primary btn-block">
-		</form>
-		<br>
-	</div>
+				<div class="form-group row">
+					<label for="form-check-label"><b>Choose your Year</b></label>
+					<div>
+						
+						<br><input class="form-check-input" type="radio" id="Freshman" name="G_choice" value="1">Freshman<br>
+						<input class="form-check-input" type="radio" id="Sophomore" name="G_choice" value="2">Sophomore<br>
+						<input class="form-check-input" type="radio" id="Junior" name="G_choice" value="3">Junior<br>
+						<input class="form-check-input" type="radio" id="Senior" name="G_choice" value="4">Senior
+						
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="form-check-label"><b>Select your Classes:</b></label>
+					<div>
+						
+						<br><input class="form-check-input" type="checkbox" id="SD" name="C_choice" value="1">Software Development<br>
+						<input class="form-check-input" type="checkbox" id="LA" name="C_choice" value="2">Linear Algebra<br>
+						<input class="form-check-input" type="checkbox" id="CT" name="C_choice" value="3">Critical Thinking<br>
+						<input class="form-check-input" type="checkbox" id="HT" name="C_choice" value="4">Heat Transfer<br>		
+
+					</div>	
+				</div>
+			<br>
+		<div class="button">
+		<input type="submit" value="confirm edition" class="btn btn-primary btn-block" name="edition" ><br>
+		</div>
+		</div>
+	</form>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
