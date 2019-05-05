@@ -1,6 +1,4 @@
-sudo -u postgres psql
 
-(you will be asked for your password)
 
 create database meetnwork_db;		
 
@@ -52,10 +50,17 @@ INSERT INTO user_todos VALUES
 
 INSERT INTO user_table VALUES
 (11, 'Elizabeth', 'Robinson', 'CSCI', 3, ARRAY[1,2,3], CAST(1 AS BOOL), 'elro2540'),
-(12, 'Brad', 'Pitt', 'CSCI', 3, ARRAY[2,3], CAST(1 AS BOOL)),
-(13, 'Jennifer', 'Lopez', 'CSCI', 2, ARRAY[1,2,3], CAST(1 AS BOOL));
+(12, 'Brad', 'Pitt', 'CSCI', 3, ARRAY[2,3], CAST(1 AS BOOL), 'brbi2540'),
+(13, 'Jennifer', 'Lopez', 'CSCI', 2, ARRAY[1,2,3], CAST(1 AS BOOL), 'jelo2540');
 
 INSERT INTO login_table VALUES ('elro2540', 'elro2540@colorado.edu', 'password');
+
+	
+ALTER TABLE user_todos
+ADD COLUMN location VARCHAR(30),
+ADD COLUMN location_desc VARCHAR(60);
+
+
 
 UPDATE user_todos
 SET location = 'Engineering Center' WHERE user_id = 12;
