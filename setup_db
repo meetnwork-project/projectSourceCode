@@ -72,3 +72,6 @@ SET location_desc = 'In small CSEL room.' WHERE user_id = 13;
 ALTER TABLE user_todos
 ALTER COLUMN location SET NOT NULL,
 ALTER COLUMN location_desc SET NOT NULL;
+
+INSERT INTO class_table(class_name, professor_name, enrolled_students)
+VALUES ('Heat Transfer', 'The Cookie Monster', ARRAY[]::integer[]);

@@ -77,7 +77,6 @@
 		</style>
 	</head>
 	<body>
-		<form action="/home" method="get">
 		<h1 align="center" style="color:white" style="font-family: cuckoo">MeetnWork</h1>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
 			<a class="navbar-brand" href="/home">
@@ -121,14 +120,16 @@
 							<tr>
 								<div class="form-group">
 								<th>Location</th>
-								<td><input type="text" class="form-control" name ="location" id="location" placeholder="" maxlength="50" rows="2">
+								<td>
+									<input type="text" class="form-control" name ="location"  placeholder="" maxlength="50" rows="2">
 								</td>
 								</div>
 							</tr>
 							<tr>
 								<div class="form-group">
 								<th>How Can I Find You?</th>
-								<td><input type="text" class="form-control" id="location_desc" name="location_desc" placeholder="" maxlength="50">
+								<td>
+									<input type="text" class="form-control" name="location_desc" placeholder="" maxlength="50">
 								</td>
 								</div>
 							</tr>
@@ -141,10 +142,6 @@
 						<tr>
 							<div class="form-group" id="toDoRow">
 								<th>To Do</th>
-								<button id="editButton" class="btn btn-sm btn" style="font-size:24px" onclick="onClickFunction(
-								<%=user_classes[0].classes.length%>
-								)"> <i class="fa">&#xf044;</i></button>
-								<button type="submit" id="doneEditing" class="btn btn-sm btn" style="font-size: 24px" disabled onclick="onClickDone(<%=user_classes[0].classes.length%>)"> <i class="fa">&#xf058;</i></button>
 							</div>
 						</tr>
 						<%if(user_classes){//populates todo list with current classes user is taking
@@ -152,7 +149,7 @@
 							var i = 1;
 							user_classes[0].classes.forEach(function(each_class){
 								var class_index = each_class-1//class ids start at 1, classes array starts at 0
-								todo_rows += '<div class="form-group"><th>'+data[class_index].class_name+'</th><input type="text" class="form-control" id="class'+i+'" name="class'+i+'" placeholder="" maxlength="50" disabled onclick="onClickFunction()"></div>';
+								todo_rows += '<div class="form-group"><th>'+data[class_index].class_name+'</th><input type="text" class="form-control" id="class'+each_class+'" name="class'+each_class+'" placeholder="" maxlength="50"></div>';
 								i += 1;
 							});%>
 						  	<%- todo_rows %>
@@ -164,16 +161,15 @@
 				</div>
 			</div>
 
-			<div class="col-8" style="width: 25rem;"> <!-- action="/home" method="get" -->
+			<div class="col-8" style="width: 25rem;"> 
 			<% 
-			if (my_data) { 
+			if (my_data[0] != undefined) { 
 			    var rows = '';
 				my_data[0].classes.forEach(function(class_item){
 					//my_data should only return one data row that matches the current user
 					//class_item = each class in classes array from user_todos
 					//rows+= adds a new table for each class 
-					var class_index = class_item-1
-					rows += '<table class="table table-hover" id="class'+class_index+'"><tbody><tr><br><h2>'+data[class_index].class_name+'</h2></tr><tr><th><b>Active Users</b></th>							<th><b>Working On</b></th><th><b>Location</b></th><th><b>Location Description</b></th></tr>';
+					rows += '<table class="table table-hover" id="class'+class_item+'"><tbody><tr><br><h2>'+data[class_item-1].class_name+'</h2></tr><tr><th><b>Active Users</b></th>							<th><b>Working On</b></th><th><b>Location</b></th><th><b>Location Description</b></th></tr>';
 					other_userdata.forEach(function(user){//for each user
 						var i = 0;
 						user.classes.forEach(function(user_class){//iterate through class array to find match with current class
@@ -187,10 +183,10 @@
 						})
 					})
 					rows += '</tbody><table>';
-				// })
-			  	});%>
-			  	<%- rows %>
-			<% } %>
+				})
+			%>
+			<%- rows %>
+			<% }; %>
 		  	</div>
 		</div>
 	</div>
@@ -201,57 +197,11 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
 		<script>
-		// $( "form" ).submit(function( event ) {
-		//   if ( $( "input:first" ).val() === "correct" ) {
-		//     $( "span" ).text( "Validated..." ).show();
-		//     return;
-		//   }
-		 
-		//   $( "span" ).text( "Not valid!" ).show().fadeOut( 1000 );
-		//   event.preventDefault();
-		// });
-		// </script>
-		<script>
-			function onClickFunction(a){
-				var i;
-				for (i=1; i<=a; i++){
-					document.getElementById("class"+i).disabled = false;
-				}
-				document.getElementById("editButton").disabled = true;
-				document.getElementById("doneEditing").disabled = false;
-				document.getElementById("doneEditing").style.color = 'green';
-			}
-		</script>
-		<script>
-			function onClickDone(a){
-				document.getElementById("doneEditing").disabled = true;
-				document.getElementById("editButton").disabled = false;
-				document.getElementById("doneEditing").style.color = 'gray';
-				var i;
-				for (i=1; i<=a; i++){
-					document.getElementById("class"+i).disabled = true;
-				}
-			}
-		</script>
-		<script>
-			function toggleFunction(){
-				if(document.getElementById("status").innerHTML === "Inactive"){
-					document.getElementById("status").innerHTML = "Active";
-					document.getElementById("location").disabled = true;
-					document.getElementById("location_desc").disabled = true;
-
-
-				}
-				else{
-					document.getElementById("status").innerHTML = "Inactive";
-					document.getElementById("location").disabled = false;
-					document.getElementById("location_desc").disabled = false;
-
-				}
-
-				
+			function logoutFunction(){
+				document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+				document.cookie = "user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+				window.location.replace("/");
 			}
 		</script>
 	</body>
