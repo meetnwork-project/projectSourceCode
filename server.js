@@ -10,13 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 var pgp = require('pg-promise')();
 
-const dbConfig = {
-	host: 'localhost',
-	port: 5432,
-	database: 'meetnwork_db',
-	user: 'postgres',
-	password: 'user'
-};
+const dbConfig = const dbConfig = process.env.DATABASE_URL;
 
 var db = pgp(dbConfig);
 
@@ -26,8 +20,6 @@ module.exports = {
 		return pool.query(text, params, callback)
 	}
 }
-
-app.set('views', __dirname + '/views');
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/'));
@@ -406,5 +398,4 @@ app.post('/profile_edit', function(req, res) {
    	}
 });
 
-app.listen(3000);
-console.log('3000 is the magic port');
+app.listen(process.env.PORT);
