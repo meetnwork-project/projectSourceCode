@@ -2,14 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,
-initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>Login Page</title>
 
-
-
     <style>
+      margin: 0;
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -20,92 +18,74 @@ initial-scale=1, shrink-to-fit=no">
           font-size: 3.5rem;
         }
       }
+      .hero-image {
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/74/Flatirons_Sunrise.jpg"); /* The image used */
+        background-color: #cccccc; /* Used if the image is unavailable */                                 
+        height: 100vh;
+        width: 100vw;
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+        }
+      .hero-text {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+      }
     </style>
 
 
     <!-- Custom styles for this template -->
-    <link href="../resources/css/signin.css" rel="stylesheet">  
-    <!--<link href="resources/css/my_style.css" rel="stylesheet">-->
+    <link href="../resources/css/signin.css" rel="stylesheet">
+    <link href="resources/css/my_style.css" rel="stylesheet">
   </head>
-  <!--
-  <body class="center text-center"> -->
-    <body>
-    <div class="jumbotron bg-dark text-white">
-    <!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-center"> -->
-      <h1 style="color:white"> <b>MeetnWork Login</b></h1> 
-      <!--<a class="navbar-brand">-->
-        <link rel='icon' href='../resources/img/favicon.ico' type='image/x-icon'/>
- 
+
+  <body class="center text-center"> 
+    <div class="hero-image">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand">
+          <link rel='icon' href="../resources/img/logo.png"alt='MeetnWork logo'/>
           <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-          <img class="rounded"
-          src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Colorado_Buffaloes_logo.svg/1200px-Colorado_Buffaloes_logo.svg.png" alt="" width="70" height="50">
-      <!--</a>-->
-      <!--<h1 style="color:white"> <b>MeetnWork Login</b></h1> -->
-    <!--</nav>-->
-   </div>
+          <img class="rounded-circle" src="../resources/img/logo.png" alt="MeetnWork logo" height="70" width="70">
+        </a>
+        <h1 style="font-family:georgia,garamond,serif;color:white;" >MeetnWork Login</h1>
+      </nav>
+      <div class="hero-text">
+        <form action="/login" method="get"> 
+          <form class="form-signin">
 
-    <form action="/login" method="get"> 
-      <!--<form class="form-signin"> -->
+          <% if (message){
+            var output_message='<P><B>'+message+'</B></P>'; %>
+          <%-output_message %>
+          <%}%>
 
-      <% if (message){
-      var output_message='<P><B>'+message+'</B></P>'; %>
-      <%-output_message %>
-      <%}%>
+          <br><br>
 
-      
-
-      <br><br>
-      <div class="container">
-          <div class="form-group text-left">
-            <label for="inputEmail"><b>Enter your email address</b></label> <input type="email" class="sr-only"</label>
-            <input type="email"  class="form-control" name ="email" id="inputEmail"
-            placeholder="Email address" required autofocus>
-        </div>
-        <div class="form-group text-left">
-            <label for="inputPassword"><b>Enter your password</b></label> <input type="password" class="sr-only"</label>
-            <input type="password" id="inputPassword" name="password" class="form-control"
-            placeholder="Password" required>
-        </div>
-        <!--
-        <div class="form-group">
-            <button class="btn btn-lg btn-primary" type="submit">Sign in</button> -->
-            <!--<a class="btn btn-lg btn-primary" href="register.html">Register</a> -->
-            <!--<input type="button" class="btn btn-lg btn-primary" value="Register" onclick="window.location.href='register'">
-            <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
-        </div> -->
-        <div class="form-group">
-            
-            <div class="form-group row">
-              <p style="padding-right:10px;"></p>
-            <!--<input type="button" class="btn btn-lg btn-primary" value="Login" onclick="window.location.href='home'"> -->
-            <button class="btn btn-lg btn-primary" type="submit" id="signinB">Sign in</button>
-            <p style="padding-right:10px;"></p>
-            <input type="button" class="btn btn-lg btn-primary" id="registerB" value="Register" onclick="window.location.href='register'">
-            
+          <div class="container">
+            <div class="form-group text-left">
+              <label for="inputEmail"><b>Enter your email address</b></label> <input type="email" class="sr-only"</label>
+              <input type="email"  class="form-control" name ="email" id="inputEmail"
+          placeholder="Email address" required autofocus>
             </div>
-        </div>
+
+            <div class="form-group text-left">
+              <label for="inputPassword"><b>Enter your password</b></label> <input type="password" class="sr-only"</label>
+              <input type="password" name="password" id="inputPassword" class="form-control"
+          placeholder="Password" required>
+            </div>
+
+            <div class="form-group">
+              <button class="btn btn-lg btn-primary" type="submit">Sign in</button>
+              <input type="button" class="btn btn-lg btn-primary" value="Register" onclick="window.location.href='register'">
+              <p class="mt-5 mb-3 text-muted">&copy; 2018-2019</p>
+            </div>
+          </div>
+          </form>
+        </form>
       </div>
-
-   
-
-     
-      
-
-    </form>
-      
-    
-
-
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-crossorigin="anonymous"></script>
-</body>
+    </div>
+  </body>
 </html>

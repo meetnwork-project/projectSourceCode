@@ -10,39 +10,38 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 var pgp = require('pg-promise')();
 
-const dbConfig = process.env.DATABASE_URL;
+const dbConfig = {
+	host: 'localhost',
+	port: 5432,
+	database: 'meetnwork_db',
+	user: 'postgres',
+	password: 'user'
+};
 
 var db = pgp(dbConfig);
 
 
-module.exports = {//Lauren
+module.exports = {
 	query: (text, params, callback) => {
 		return pool.query(text, params, callback)
 	}
 }
 
-
+app.set('views', __dirname + '/views');
 
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/'));//This line is necessary for us to use relative paths and access our resources directory
+app.use(express.static(__dirname + '/'));
 
 
 // login page
-
 app.get('/', function(req, res) {
 	res.render('pages/login',{
-		// local_css:"signin.css",
 		my_title:"Login Page",
-		// login_query: '',
 		message:''
-		//loginCheck: '',
 	});
 });
 
 app.get('/login', function(req, res) {
-
-    //var email=req.body.email;
-    //var password=req.body.password;
     var inputEmail=req.query.email;
     var inputPassword=req.query.password;
 
@@ -234,8 +233,8 @@ app.post('/home/todos', function(req, res) {//in an ideal world, this would be d
 app.get('/register', function(req, res) {
 	res.render('pages/register',{
 		my_title:"Registration Page",
-		message: ''
-		// local_css:"signin.css", 
+		message: '',
+		local_css:"signin.css"
 	})
 });
 
@@ -350,7 +349,6 @@ app.get('/profile_edit', function(req, res) {
 });
 
 app.post('/profile_edit', function(req, res) {
-	var username=req.body.name;
 	var first_name=req.body.first_name;
 	var last_name=req.body.last_name;
 	var password=req.body.password;
@@ -358,14 +356,10 @@ app.post('/profile_edit', function(req, res) {
 	var major=req.body.M_choice;
 	var grade=req.body.G_choice
 	var classes=req.body.C_choice;
-	console.log(username);
-	console.log(first_name);
-	console.log(last_name);
-	console.log(password);
-	console.log(confirm_password);
-	console.log(major);
-	console.log(grade);
-	console.log(classes);
+
+	var current_user_email = req.cookies['name'];
+	var current_user_id = req.cookies['user_id'];
+
 	if(password==''||first_name==''||last_name==''||major==''||grade==''||classes==''){
        	res.render('pages/profile_edit',{
          	my_title:"profile edition page",
@@ -381,8 +375,8 @@ app.post('/profile_edit', function(req, res) {
  	else{
       	try{
            	console.log("Inside else block: " + classes);
-           	var edit_query = "UPDATE login_table SET user_name='"+username+"', user_password='"+password+"' WHERE user_email='goodluck@colorado.edu';";
-            var edit_query2="UPDATE user_table SET first_name='"+first_name+"',last_name='"+last_name+"',major='"+major+"',year='"+grade+"',classes=ARRAY["+classes+"] WHERE user_name='goodluck';";
+           	var edit_query = "UPDATE login_table SET user_password='"+password+"' WHERE user_email='"+current_user_email+"';";
+            var edit_query2="UPDATE user_table SET first_name='"+first_name+"',last_name='"+last_name+"',major='"+major+"',year='"+grade+"',classes=ARRAY["+classes+"] WHERE user_id='"+current_user_id+"';";
            	console.log("Insert query: " + edit_query);
            	console.log("Insert query2: " + edit_query2);
            	db.task('get-everything', task =>{
@@ -392,10 +386,7 @@ app.post('/profile_edit', function(req, res) {
                ]);
             })
            	.then(function(edition){
-             	console.log("execute 1");
-             	res.render('pages/login',{
-               		my_title:"Login page"
-             	});
+             	res.redirect('/home');
            	})
            	.catch(function(err){
              	console.log("error in insert_query from db");
@@ -415,4 +406,5 @@ app.post('/profile_edit', function(req, res) {
    	}
 });
 
-app.listen(process.env.PORT);
+app.listen(3000);
+console.log('3000 is the magic port');
