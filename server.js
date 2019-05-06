@@ -12,6 +12,17 @@ var pgp = require('pg-promise')();
 
 const dbConfig = process.env.DATABASE_URL;
 
+//to run locally:
+
+// const dbConfig = {
+// 	host: 'localhost',
+// 	port: 5432,
+// 	database: 'meetnwork_db',
+// 	user: 'postgres',
+// 	password: 'user'
+// };
+// app.set('views', __dirname + '/views');
+
 var db = pgp(dbConfig);
 
 
@@ -399,3 +410,8 @@ app.post('/profile_edit', function(req, res) {
 });
 
 app.listen(process.env.PORT);
+
+//to run locally:
+
+// app.listen(3000);
+// console.log('3000 is the magic port');
